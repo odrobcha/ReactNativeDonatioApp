@@ -5,10 +5,7 @@ import PropTypes from 'prop-types';
 import { horizontalScale } from '../../assets/styles/scaling';
 
 const Badge = (props) => {
-    const handlePress = () => {
 
-        props.onPress();
-    };
     const [width, setWidth] = useState(0);
     const textRef = useRef(null);
     const paddingHorizontal= 10;
