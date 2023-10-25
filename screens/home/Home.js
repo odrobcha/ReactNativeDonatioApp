@@ -8,6 +8,8 @@ import style from './style';
 import Button from '../../components/button/Button';
 import Tab from '../../components/tab/Tab'
 import Badge from '../../components/badge/Badge';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faSearch} from '@fortawesome/free-solid-svg-icons'
 
 
 const Home = ()=>{
@@ -22,6 +24,7 @@ const Home = ()=>{
           <Tab title={'Hilglight'} />
           <Tab title={'Hilglight'} isInactive={isActive}/>
           <Badge title={"Badge"}/>
+          <FontAwesomeIcon icon={faSearch}/>
 
       </SafeAreaView>
     )
