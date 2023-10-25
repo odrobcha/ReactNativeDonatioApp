@@ -154,3 +154,27 @@ to keep track of store changes
 middleware: getDefaultMiddleware => {
         return getDefaultMiddleware().concat(logger)
     }
+
+
+##Redux-persist
+Library to persist(save state of reactApp(data) event in reload app)
+
+- run `npm install redux-persist`
+- import {persistReducer, persistStore} from 'redux-persist' to redux/store.js;
+- set the persistent in  redux/store.js
+const configuration = {
+    key: 'root',  // given name
+    storage: AsyncStorage,  //storage we use 
+    version: 1   //version (given)
+}
+const persistedReducer = persistReducer(configuration, rootReducer);
+
+export const persistor = persistStore(store); // save the store data
+
+- import {PersistGate} from 'redux-persist/integration/react'; in App.js
+- wrap App in <PersistGate persistor={persistor} loading={null}></PersistGate>
+
+##AsyncStorage
+AsyncStorage is unencrypted,async and persistent key-value storage, that is global to the App. Used to save data even when App is closed and restrart
+- run `npm install @react-native-async-storage/async-storage`
+- import AsyncStorage from '@react-native-async-storage/async-storage' to redux/store.js
