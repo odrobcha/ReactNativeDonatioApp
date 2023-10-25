@@ -1,53 +1,84 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, Pressable, Text } from 'react-native';
+import { SafeAreaView, Text, View, ScrollView, Image, Pressable, FlatList } from 'react-native';
 
 import globalStyles from '../../assets/styles/globalStyles';
+import style from './style';
 
-import Search from '../../components/search/Search';
-import DonationItem from '../../components/donationItem/DonationItem';
-import { horizontalScale } from '../../assets/styles/scaling';
-import Header from '../../components/header/Header';
 import { useDispatch, useSelector } from 'react-redux';
-import {updateFirstName} from '../../redux/reducers/User'
-import style from '../../components/search/style';
+import Header from '../../components/header/Header';
+import Search from '../../components/search/Search';
+import Tab from '../../components/tab/Tab'
+
+//import {updateFirstName, resetToInitialState} from '../../redux/reducers/User'
 
 const Home = () => {
+
     const handleSearch = (val) => {
         console.log(val);
 
     };
-    const handlePress = () =>{
-      dispatch(updateFirstName({firstName: "O."}));
 
-    };
-    const user = useSelector(state => state.user);
+    // const handlePress = () => {
+    //     dispatch(updateFirstName({ firstName: 'Oksana' }));
+    //
+    // };
     const dispatch = useDispatch();
+    const user = useSelector(state => state.user);
+    const categories = useSelector(state => state.categories);
 
     const [isActive, setIsActive] = useState(true);
     return (
       <SafeAreaView style={[globalStyles.backgroundWhite, globalStyles.flex]}>
-          <Header title={user.firstName + ' ' + user.lastName}/>
+          <ScrollView showsVerticalScrollIndicator={false}>
+              <View style={style.header}>
+                  <View>
+                      <Text style={style.headerIntroText}>Hello</Text>
+                      <View>
+                          <View style={style.userName}>
+                              <Header title={user.firstName + ' ' + user.lastName[0] + '. 👋'}/>
+                          </View>
+                      </View>
+                  </View>
+                  <Image source={{ uri: user.profileImage }}
+                         style={style.profileImage}
+                         resizeMode={'contain'}
+                  />
+
+              </View>
+
+              <View style={style.searchBox}>
+                  <Search/>
+              </View>
+              <Pressable style={style.highlightedImageContainer}>
+                  <Image source={require('../../assets/images/highlighted_image.png')}
+                         resizeMode={'contain'}
+                         style={style.highlightedImage}
+                  />
+
+              </Pressable>
+
+              <View style={style.categories}>
+                  <Text>TEst</Text>
+                  <FlatList
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                    data={categories.categories}
+                    renderItem={({ item }) =>
+                      <View style={style.categoryItem} key={item.id}>
+                        <Tab
+                          title={item.name}
+                          isInactive={item.categoryId !== categories.selectedCategoryId}
+
+                        >
+                        </Tab>
+                      </View>
+                    }
+                  />
+
+              </View>
 
 
-          <Search onSearch={handleSearch}/>
-          <View style={{flexDirection: 'row', justifyContent: "space-between", paddingHorizontal: horizontalScale(24)}}>
-              <DonationItem
-                uri={'https://img.pixers.pics/pho_wat(s3:700/FO/44/24/64/31/700_FO44246431_ab024cd8251bff09ce9ae6ecd05ec4a8.jpg,525,700,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,305,650,jpg)/stickers-cactus-cartoon-illustration.jpg.jpg'}
-                badgeTitle={'Environment'}
-                donationTitle={'Tree cactus'}
-                price={3}
-              />
-              <DonationItem
-                uri={'https://img.pixers.pics/pho_wat(s3:700/FO/44/24/64/31/700_FO44246431_ab024cd8251bff09ce9ae6ecd05ec4a8.jpg,525,700,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,305,650,jpg)/stickers-cactus-cartoon-illustration.jpg.jpg'}
-                badgeTitle={'Environment'}
-                donationTitle={'Tree cactus'}
-                price={3}
-              />
-          </View>
-          <Pressable onPress={handlePress}>
-              <Text>Change name3333</Text>
-          </Pressable>
-
+          </ScrollView>
       </SafeAreaView>
     );
 };

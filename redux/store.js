@@ -5,9 +5,11 @@ import {persistReducer, persistStore} from 'redux-persist';
 import {logger} from 'redux-logger'
 
 import User from './reducers/User';
+import Categories from './reducers/Categories';
 
 const rootReducer = combineReducers({
-    user: User
+    user: User,
+    categories: Categories,
 });
 const configuration = {
     key: 'root',
@@ -17,9 +19,9 @@ const configuration = {
 const persistedReducer = persistReducer(configuration, rootReducer);
 const store = configureStore({
     reducer: persistedReducer,
-    // middleware: getDefaultMiddleware => {
-    //     return getDefaultMiddleware({serializableCheck: false}).concat(logger)
-    // }
+    middleware: getDefaultMiddleware => {
+        return getDefaultMiddleware({serializableCheck: false}).concat(logger)
+    }
 });
 
 export default store;
