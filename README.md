@@ -91,7 +91,7 @@ To learn more about React Native, take a look at the following resources:
 - run `npm install prop-types --save`
 
 ## To install fontawesome
-- go to https://fontawesome.com/docs/web/use-with/react-native
+Documentation can be found here https://fontawesome.com/docs/web/use-with/react-native
 - run `npm i --save @fortawesome/react-native-fontawesome @fortawesome/fontawesome-svg-core react-native-svg`
 - to install free branding run 
     - `npm i --save @fortawesome/free-solid-svg-icons`
@@ -103,7 +103,7 @@ to get info over the device (such as hasNotch())
 `npm install react-native-device-info --save`
 
 ## Navigation
- Documantation can be found here https://reactnavigation.org
+Documentation can be found here https://reactnavigation.org
    - to install Navigation run 
           `npm install @react-navigation/native`
    - install dependencies into bare React Native project run 
@@ -116,16 +116,41 @@ to get info over the device (such as hasNotch())
            }
            to MainActivity.java in Android folder
    - Wrap App with NavigationContainer container
-## to installStack navigation
-   - Install Stack navigation https://reactnavigation.org/docs/stack-navigator
-        - run `npm install @react-navigation/stack`
-        - run `npm install react-native-gesture-handler';`        
-        - Add import 'react-native-gesture-handler' to index.js
-        - run `npm install @react-native-masked-view/masked-view`
-        - set MainNavigation (create folder navigation and MainNavigation.js) 
-        - add MainNavigation component to the NavigationContainer inside App component
+## to install Stack navigation
+Documentation can be found here https://reactnavigation.org/docs/stack-navigator
+- run `npm install @react-navigation/stack`
+- run `npm install react-native-gesture-handler';`        
+ - Add import 'react-native-gesture-handler' to index.js
+ - run `npm install @react-native-masked-view/masked-view`
+ - set MainNavigation (create folder navigation and MainNavigation.js) 
+ - add MainNavigation component to the NavigationContainer inside App component
 ## Drawing navigation   
-- Documentation can be found here https://reactnavigation.org/docs/drawer-navigator/
+Documentation can be found here https://reactnavigation.org/docs/drawer-navigator/
 - install drawer , run `npm install @react-navigation/drawer`
 - install react-native-gesture-handler and react-native-reanimated, run`npm install react-native-gesture-handler react-native-reanimated`
 - edit babel.config. Add plugins: ['react-native-reanimated/plugin'], to babe.config.js
+
+
+## Redux end Redux ToolKits
+Documentation can be found here https://redux-toolkit.js.org/introduction/getting-started
+- run `npm install @reduxjs/toolkit`
+- run `npm install redux`
+- run`npm install react-redux`
+- run `npm install --save-dev @redux-devtools/core`
+- to create slice and combined reducer
+     - create slice (redux/reducers/User.js)
+     - create combinedReducer (redux/store.js)
+     - import {Provider} and store in App.js
+     - wrap app component to <Provider store={store}></Provider>
+        
+- to use data from store import {useSelector} from 'redux'
+- to dispatch action import {useDispatch} from 'redux'
+
+##Redux-logger
+to keep track of store changes
+- run `npm install redux-logger`
+- import {logger} from 'redux-logger'   to redux/store.js
+- add middleware to configureStore
+middleware: getDefaultMiddleware => {
+        return getDefaultMiddleware().concat(logger)
+    }

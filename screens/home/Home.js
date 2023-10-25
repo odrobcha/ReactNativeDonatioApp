@@ -1,19 +1,32 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View } from 'react-native';
+import { SafeAreaView, View, Pressable, Text } from 'react-native';
 
 import globalStyles from '../../assets/styles/globalStyles';
 
 import Search from '../../components/search/Search';
 import DonationItem from '../../components/donationItem/DonationItem';
 import { horizontalScale } from '../../assets/styles/scaling';
+import Header from '../../components/header/Header';
+import { useDispatch, useSelector } from 'react-redux';
+import {updateFirstName} from '../../redux/reducers/User'
+import style from '../../components/search/style';
 
 const Home = () => {
     const handleSearch = (val) => {
         console.log(val);
+
     };
+    const handlePress = () =>{
+      dispatch(updateFirstName({firstName: "O."}));
+
+    };
+    const user = useSelector(state => state.user);
+    const dispatch = useDispatch();
+
     const [isActive, setIsActive] = useState(true);
     return (
       <SafeAreaView style={[globalStyles.backgroundWhite, globalStyles.flex]}>
+          <Header title={user.firstName + ' ' + user.lastName}/>
 
 
           <Search onSearch={handleSearch}/>
@@ -31,6 +44,9 @@ const Home = () => {
                 price={3}
               />
           </View>
+          <Pressable onPress={handlePress}>
+              <Text>Change name3333</Text>
+          </Pressable>
 
       </SafeAreaView>
     );

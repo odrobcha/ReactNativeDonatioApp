@@ -5,7 +5,9 @@ import Home from '../screens/home/Home';
 const Stack = createStackNavigator();
 const MainNavigation = ()=>{
     return(
-      <Stack.Navigator screenOptions={{header: ()=> null, headerShown: false}}>
+      <Stack.Navigator
+        initialRouteName={Routes.Home}
+        screenOptions={{header: ()=> null, headerShown: false}}>
           <Stack.Screen name={Routes.Home} component={Home}/>
       </Stack.Navigator>
     )
