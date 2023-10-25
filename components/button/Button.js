@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 const Button = (props) =>{
     const handlePress = () =>{
-      props.onPress()
+      props.onPress();
     };
 
     return(
