@@ -31,6 +31,6 @@ Button.default = {
 Button.propTypes = {
     title: PropTypes.string.isRequired,
     isDisabled: PropTypes.bool,
-    onPress: PropTypes.function
+    onPress: PropTypes.func
 }
 export default Button;
