@@ -8,9 +8,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import Header from '../../components/header/Header';
 import Search from '../../components/search/Search';
 import Tab from '../../components/tab/Tab';
-import {updateSelectedCategoryId, resetCategories} from '../../redux/reducers/Categories'
+import {updateSelectedCategoryId, resetCategories} from '../../redux/reducers/Categories';
 
 
+import {resetDonations} from '../../redux/reducers/Donations';
+import DonationItem from '../../components/donationItem/DonationItem';
 //import {updateFirstName, resetToInitialState} from '../../redux/reducers/User'
 
 const Home = () => {
@@ -19,9 +21,21 @@ const Home = () => {
     };
 
     const dispatch = useDispatch();
-    //  dispatch(resetCategories());
+     //  dispatch(resetCategories());
+     // dispatch(resetDonations());
     const user = useSelector(state => state.user);
     const categories = useSelector(state => state.categories);
+    const donations = useSelector(state=> state.donations);
+
+    const [donationItems, setDonationItems] = useState([])
+
+    useEffect(() => {
+        const items = donations.items.filter(value =>
+          value.categoryIds.includes(categories.selectedCategoryId),
+        );
+        setDonationItems(items);
+
+    }, [categories.selectedCategoryId]);
 
     const [categoryPage, setCategoryPage] = useState(1);
     const [categoryList, setCategoryList] = useState([]);
@@ -92,7 +106,9 @@ const Home = () => {
                         setIsLoadingCategories(true);
                         let newData = pagination(categories.categories, categoryPage, categoryPageSize);
                         if(newData.length>0){
-                            setCategoryList(prev=>[...prev, ...newData]);
+                            setCategoryList(prev=>{
+                                 return[...prev, ...newData]
+                            });
                             setCategoryPage(prev=> prev + 1)
                         }
                         setIsLoadingCategories(false);
@@ -115,6 +131,27 @@ const Home = () => {
                   />
 
               </View>
+
+              {donationItems.length>0 &&
+              <View style={style.donationItemsContainer}>
+                  {donationItems.map(value =><DonationItem
+                    key = {value.donationItemId}
+                    donationItemId = {value.donationItemId}
+                    uri={value.image}
+                    badgeTitle={categories.categories.filter(val => val.categoryId === categories.selectedCategoryId)[0].name}
+                    donationTitle={value.name}
+                    price={parseFloat(value.price)}
+                    onPress={(selectedDonationId) => {
+                        console.log(selectedDonationId);
+                    }}/>
+                  )}
+
+
+              </View>
+              }
+
+
+
 
 
           </ScrollView>
