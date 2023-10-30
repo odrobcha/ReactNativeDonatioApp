@@ -1,13 +1,15 @@
-import React, {useState, useRef} from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import style from './style';
 import { Pressable, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { horizontalScale } from '../../assets/styles/scaling';
 
 const Tab = (props) => {
+    // useEffect(()=>{
+    //     console.log("TEST " , props)
+    // }, [])
     const handlePress = () => {
-
-        props.onPress();
+        props.onPress(props.tabId);
     };
     const [width, setWidth] = useState(0);
     const textRef = useRef(null);
@@ -20,7 +22,6 @@ const Tab = (props) => {
     return (
       <Pressable
         style={[style.tab, props.isInactive && style.isInactiveTab, tabWidth]}
-        disabled={props.isInactive}
         onPress={handlePress}
       >
           <Text
@@ -46,5 +47,6 @@ Tab.propTypes = {
     title: PropTypes.string.isRequired,
     isInactive: PropTypes.bool,
     onPress: PropTypes.func,
+    tabId: PropTypes.number.isRequired
 };
 export default Tab;

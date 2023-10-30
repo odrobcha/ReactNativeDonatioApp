@@ -42,7 +42,13 @@ const style = StyleSheet.create({
     },
     categoryItem: {
 
+    },
+    categoryHeader:{
+        marginHorizontal: horizontalScale(24),
+        marginBottom: verticalScale(16),
+        marginTop: verticalScale(6)
     }
+
 
 });
 

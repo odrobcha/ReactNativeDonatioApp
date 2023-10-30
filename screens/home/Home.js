@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView, Text, View, ScrollView, Image, Pressable, FlatList } from 'react-native';
 
 import globalStyles from '../../assets/styles/globalStyles';
@@ -7,24 +7,45 @@ import style from './style';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from '../../components/header/Header';
 import Search from '../../components/search/Search';
-import Tab from '../../components/tab/Tab'
+import Tab from '../../components/tab/Tab';
+import {updateSelectedCategoryId, resetCategories} from '../../redux/reducers/Categories'
+
 
 //import {updateFirstName, resetToInitialState} from '../../redux/reducers/User'
 
 const Home = () => {
-
     const handleSearch = (val) => {
         console.log(val);
+    };
+
+    const dispatch = useDispatch();
+    //  dispatch(resetCategories());
+    const user = useSelector(state => state.user);
+    const categories = useSelector(state => state.categories);
+
+    const [categoryPage, setCategoryPage] = useState(1);
+    const [categoryList, setCategoryList] = useState([]);
+    const categoryPageSize  = 4;
+    const [isLoadingCategories, setIsLoadingCategories] = useState(false)
+    useEffect(()=>{
+        setIsLoadingCategories(true);
+        setCategoryList(pagination(categories.categories,categoryPage, categoryPageSize));
+        setCategoryPage(prev => prev+1);
+        setIsLoadingCategories(false);
+    }, [])
+
+    const pagination = (items, pageNumber, pageSize) =>{
+        const startIndex = (pageNumber -1 ) * pageSize;
+        const endIndex = startIndex + pageSize;
+
+        if(startIndex>=items.length){
+            return []
+        }
+        return items.slice(startIndex, endIndex);
 
     };
 
-    // const handlePress = () => {
-    //     dispatch(updateFirstName({ firstName: 'Oksana' }));
-    //
-    // };
-    const dispatch = useDispatch();
-    const user = useSelector(state => state.user);
-    const categories = useSelector(state => state.categories);
+
 
     const [isActive, setIsActive] = useState(true);
     return (
@@ -56,19 +77,37 @@ const Home = () => {
                   />
 
               </Pressable>
+              <View style={style.categoryHeader}>
+                  <Header title={"Select category"} type={2}/>
+               </View>
 
               <View style={style.categories}>
-                  <Text>TEst</Text>
+
                   <FlatList
+                    onEndReachedThreshold={0.5}
+                    onEndReached={()=>{
+                        if(isLoadingCategories){
+                            return
+                        }
+                        setIsLoadingCategories(true);
+                        let newData = pagination(categories.categories, categoryPage, categoryPageSize);
+                        if(newData.length>0){
+                            setCategoryList(prev=>[...prev, ...newData]);
+                            setCategoryPage(prev=> prev + 1)
+                        }
+                        setIsLoadingCategories(false);
+                    }}
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
-                    data={categories.categories}
+                    data={categoryList}
                     renderItem={({ item }) =>
-                      <View style={style.categoryItem} key={item.id}>
+                      <View style={style.categoryItem} key={item.categoryId}>
+
                         <Tab
+                          tabId = {item.categoryId}
+                         onPress={()=>dispatch(updateSelectedCategoryId(item.categoryId))}
                           title={item.name}
                           isInactive={item.categoryId !== categories.selectedCategoryId}
-
                         >
                         </Tab>
                       </View>
