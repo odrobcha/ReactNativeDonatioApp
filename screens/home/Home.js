@@ -17,7 +17,7 @@ import { Routes } from '../../navigation/Routes';
 
 const Home = ({navigation}) => {
     const handleSearch = (val) => {
-        console.log(val);
+
     };
 
     const dispatch = useDispatch();
@@ -132,22 +132,27 @@ const Home = ({navigation}) => {
 
               {donationItems.length > 0 &&
               <View style={style.donationItemsContainer}>
-                  {donationItems.map(value =>
-                    <View style={style.singleDonationItem}
-                      key={value.donationItemId}>
-                    <DonationItem
-                      donationItemId={value.donationItemId}
-                      uri={value.image}
-                      badgeTitle={categories.categories.filter(val => val.categoryId === categories.selectedCategoryId)[0].name}
-                      donationTitle={value.name}
-                      price={parseFloat(value.price)}
-                      onPress={(selectedDonationId) => {
-                          dispatch(updateSelectedDonationId(selectedDonationId));
-                          navigation.navigate(Routes.SingleDonationItem)
+                  {donationItems.map(value => {
+                      const categoryInformation = categories.categories.find(val => val.categoryId === categories.selectedCategoryId)
+                    return (
+                      <View style={style.singleDonationItem}
+                            key={value.donationItemId}>
+                          <DonationItem
+                            donationItemId={value.donationItemId}
+                            uri={value.image}
+                            badgeTitle={categoryInformation .name}
+                            donationTitle={value.name}
+                            price={parseFloat(value.price)}
+                            onPress={(selectedDonationId) => {
+                                dispatch(updateSelectedDonationId(selectedDonationId));
+                                navigation.navigate(Routes.SingleDonationItem, {categoryInformation})
+                            }}/>
+                      </View>
+                    )
+                  }
 
-                          console.log(selectedDonationId);
-                      }}/>
-                    </View>,
+
+
                   )}
               </View>
               }

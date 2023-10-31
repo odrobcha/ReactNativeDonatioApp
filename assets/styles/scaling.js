@@ -1,11 +1,11 @@
 import {Dimensions} from 'react-native';
-//import DeviceInfo from 'react-native-device-info';
+import DeviceInfo from 'react-native-device-info';
 
 // Get the device's screen dimensions
 const {width, height} = Dimensions.get('window');
 
 // Check if the device is small (e.g. iPhone 5, SE, etc.)
-const isSmall = width <= 375 //&& !DeviceInfo.hasNotch();
+const isSmall = width <= 375 && !DeviceInfo.hasNotch();
 
 // Define the guideline base width based on whether the device is small or not
 const guidelineBaseWidth = () => {

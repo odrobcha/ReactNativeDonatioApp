@@ -15,8 +15,7 @@ export const User = createSlice({
             state.firstName = action.payload.firstName
         },
         resetToInitialState: (state) => {
-            console.log("TETS")
-           // return initialState;
+            return initialState;
         },
 
 

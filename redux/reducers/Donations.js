@@ -5,7 +5,7 @@ const initialState = {
         {
             name: 'Solar-powered lantern',
             description:
-              'A lantern powered by solar energy, providing a sustainable and eco-friendly source of light to those in need.',
+              'A lantern powered by solar energy, providing a sustainable and eco-friendly source of light to those in need. A lantern powered by solar energy, providing a sustainable and eco-friendly source of light to those in need. A lantern powered by solar energy, providing a sustainable and eco-friendly source of light to those in need. A lantern powered by solar energy, providing a sustainable and eco-friendly source of light to those in need.A lantern powered by solar energy, providing a sustainable and eco-friendly source of light to those in need. A lantern powered by solar energy, providing a sustainable and eco-friendly source of light to those in need.',
             image:
               'https://images.unsplash.com/photo-1507697364665-69eec30ea71e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2371&q=80',
             donationItemId: 1,
