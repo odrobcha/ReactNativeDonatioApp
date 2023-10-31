@@ -6,7 +6,7 @@ import style from './style';
 
 const Header = (props) => {
     const styleToApply = ()=>{
-        switch (props.types) {
+        switch (props.type) {
             case 1:
                 return style.title1;
             case 2:
@@ -16,11 +16,12 @@ const Header = (props) => {
             default:
                 return style.title1
         }
-    }
+    };
     return (
       <View>
           <Text
             style={[styleToApply(), props.color && {color: props.color}]}
+            numberOfLines={props.numberOfLines}
           >
               {props.title}
           </Text>
@@ -31,14 +32,16 @@ const Header = (props) => {
 
 Header.default= {
     title: '',
-    types: 1,
-    color: "black"
+    type: 1,
+    color: "black",
+    numberOfLines: null
 };
 
 Header.propTypes = {
     title: PropTypes.string,
-    types: PropTypes.number,
-    color: PropTypes.string
+    type: PropTypes.number,
+    color: PropTypes.string,
+    numberOfLines : PropTypes.number
 }
 
 export default Header;

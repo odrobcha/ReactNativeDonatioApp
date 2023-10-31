@@ -28,6 +28,7 @@ const DonationItem = (props) => {
                 title={props.donationTitle}
                 color={'#0A043C'}
                 type={3}
+                numberOfLines = {1}
               />
               <View style={style.price}>
                   <Header
