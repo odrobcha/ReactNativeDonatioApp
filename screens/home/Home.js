@@ -10,11 +10,12 @@ import Search from '../../components/search/Search';
 import Tab from '../../components/tab/Tab';
 import { updateSelectedCategoryId, resetCategories } from '../../redux/reducers/Categories';
 
-import { resetDonations } from '../../redux/reducers/Donations';
+import { resetDonations, updateSelectedDonationId } from '../../redux/reducers/Donations';
 import DonationItem from '../../components/donationItem/DonationItem';
+import { Routes } from '../../navigation/Routes';
 //import {updateFirstName, resetToInitialState} from '../../redux/reducers/User'
 
-const Home = () => {
+const Home = ({navigation}) => {
     const handleSearch = (val) => {
         console.log(val);
     };
@@ -141,6 +142,9 @@ const Home = () => {
                       donationTitle={value.name}
                       price={parseFloat(value.price)}
                       onPress={(selectedDonationId) => {
+                          dispatch(updateSelectedDonationId(selectedDonationId));
+                          navigation.navigate(Routes.SingleDonationItem)
+
                           console.log(selectedDonationId);
                       }}/>
                     </View>,
