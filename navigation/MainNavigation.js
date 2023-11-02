@@ -6,16 +6,25 @@ import Registration from '../screens/registration/Registration'
 import SingleDonationItem from '../screens/singleDonationItem/singleDonationItem';
 
 const Stack = createStackNavigator();
-const MainNavigation = ()=>{
+export const NonAuthenticated = ()=>{
     return(
       <Stack.Navigator
         initialRouteName={Routes.Login}
         screenOptions={{header: ()=> null, headerShown: false}}>
           <Stack.Screen name={Routes.Login} component={Login}/>
           <Stack.Screen name={Routes.Registration} component={Registration}/>
-          <Stack.Screen name={Routes.Home} component={Home}/>
-          <Stack.Screen name={Routes.SingleDonationItem} component={SingleDonationItem}/>
       </Stack.Navigator>
     )
+};
+
+
+export const Authenticated = () =>{
+   return(  <Stack.Navigator
+      initialRouteName={Routes.Home}
+      screenOptions={{header: ()=> null, headerShown: false}}>
+        <Stack.Screen name={Routes.Home} component={Home}/>
+        <Stack.Screen name={Routes.SingleDonationItem} component={SingleDonationItem}/>
+    </Stack.Navigator>
+   )
 }
-export default MainNavigation
+

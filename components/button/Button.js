@@ -26,11 +26,11 @@ const Button = (props) =>{
 Button.default = {
     isDisabled: false,
     onPress: ()=>{}
-}
+};
 
 Button.propTypes = {
     title: PropTypes.string.isRequired,
     isDisabled: PropTypes.bool,
     onPress: PropTypes.func
-}
+};
 export default Button;

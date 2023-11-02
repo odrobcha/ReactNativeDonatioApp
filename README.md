@@ -154,8 +154,6 @@ to keep track of store changes
 middleware: getDefaultMiddleware => {
         return getDefaultMiddleware().concat(logger)
     }
-
-
 ##Redux-persist
 Library to persist(save state of reactApp(data) event in reload app)
 
@@ -178,3 +176,45 @@ export const persistor = persistStore(store); // save the store data
 AsyncStorage is unencrypted,async and persistent key-value storage, that is global to the App. Used to save data even when App is closed and restrart
 - run `npm install @react-native-async-storage/async-storage`
 - import AsyncStorage from '@react-native-async-storage/async-storage' to redux/store.js
+
+
+#FireBase SetUp
+Documentation can be found here :https://rnfirebase.io/
+
+- Create a new Firebase project https://console.firebase.google.com/u/0/
+
+- Install the React Native Firebase "app" module, run `npm install --save @react-native-firebase/app`
+###Android Setup 
+- On the Firebase console, add a new Android application and enter your projects details. 
+    The "Android package name" must match your local projects package name which can be found inside of 
+    the namespace field in /android/app/build.gradle, or in the manifest tag 
+    within the /android/app/src/main/AndroidManifest.xml file within your project 
+    for projects using android gradle plugin v7 and below
+    
+- then in Firebase new Project generate and google-service.json and add it to android/app folder
+- continue to console (in course)
+    OR follow the documanetation
+- get signing certificate run `cd android && ./gradlew signingReport`
+- go to android/build.gradle
+        Configure Firebase with Android credentials
+            First, add the google-services plugin as a dependency inside of your /android/build.gradle file:
+            buildscript {
+              dependencies {
+                // ... other dependencies
+                classpath 'com.google.gms:google-services:4.3.15'
+                // Add me --- /\
+              }
+            }
+- Lastly, execute the plugin by adding the following to your /android/app/build.gradle file:
+                 apply plugin: 'com.android.application'
+                 apply plugin: 'com.google.gms.google-services' // <- Add this line
+
+###iOS Setup
+
+follow the instruction here Documentation can be found here :https://rnfirebase.io/
+
+## FireBase Authentication
+Documentation can be found here https://rnfirebase.io/auth/usage
+
+-install auth module,run `npm install @react-native-firebase/auth`
+-Go to FireBase project, Chose Authentication tab -> getStarted->email/password -> enable it-> Save
