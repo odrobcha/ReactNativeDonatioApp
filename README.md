@@ -241,3 +241,10 @@ run `npm install @stripe/stripe-react-native`
 
 
 ##Deployment
+####App Icon
+- Icon can be generated here https://makeappicon.com/. DownLoad generated icons
+####Android 
+All icons are in android/app/src/main/res. Replace the items by generated above items
+####iOS 
+Do the same for the iOS folder
+####Custom splash
