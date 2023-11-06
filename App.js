@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Provider } from 'react-redux';
 import store, { persistor } from './redux/store';
 import {PersistGate} from 'redux-persist/integration/react';
-import RootNavigation from './screens/registration/RootNavigation';
+import RootNavigation from './navigation/RootNavigation';
 import { checkToken } from './api/user';
 
 const App = () => {

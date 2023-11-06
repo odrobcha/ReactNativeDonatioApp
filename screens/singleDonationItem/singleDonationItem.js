@@ -8,10 +8,15 @@ import BackButton from '../../components/backButton/BackButton';
 import Badge from '../../components/badge/Badge';
 import Header from '../../components/header/Header'
 import Button from '../../components/button/Button';
+import { Routes } from '../../navigation/Routes';
 
 const SingleDonationItem = ({ navigation, route }) => {
     const donationItemInformation = useSelector(state => state.donations.selectedDonationInformation);
     const categoryInformation = route.params.categoryInformation;
+    const navigateToPaymentPage = () =>{
+        navigation.navigate(Routes.Payment)
+    }
+
 
     return (
       <SafeAreaView style={[globalStyles.backgroundWhite, globalStyles.flex]}>
@@ -35,7 +40,7 @@ const SingleDonationItem = ({ navigation, route }) => {
           </ScrollView>
           <View style={style.button}>
               <Button title={"Donate"}
-                      onPress={()=>{console.log("Donate")}}
+                      onPress={navigateToPaymentPage}
               />
           </View>
 

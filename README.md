@@ -218,3 +218,23 @@ Documentation can be found here https://rnfirebase.io/auth/usage
 
 -install auth module,run `npm install @react-native-firebase/auth`
 -Go to FireBase project, Chose Authentication tab -> getStarted->email/password -> enable it-> Save
+
+##NodeJS and ExpressJS
+
+## Payment
+#### Stripe
+Payment processes platform. Go to stripe.com, and create our account
+Documentation can be found here 
+- https://stripe.com/docs/libraries/react-native
+- https://github.com/stripe/stripe-react-native
+
+####Install
+run `npm install @stripe/stripe-react-native`
+
+- For Android 
+  - Add below dependency to your android/app/build.gradle file with specified version
+        implementation 'com.google.android.material:material:<version>'
+  - Set appropriate style in your android/src/main/res/values/styles.xml file
+  <style name="Theme.MyApp" parent="Theme.MaterialComponents.DayNight">
+      <!-- ... -->
+  </style>
