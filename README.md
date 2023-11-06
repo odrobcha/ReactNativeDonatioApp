@@ -238,3 +238,6 @@ run `npm install @stripe/stripe-react-native`
   <style name="Theme.MyApp" parent="Theme.MaterialComponents.DayNight">
       <!-- ... -->
   </style>
+
+
+##Deployment
