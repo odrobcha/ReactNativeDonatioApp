@@ -248,3 +248,6 @@ All icons are in android/app/src/main/res. Replace the items by generated above 
 ####iOS 
 Do the same for the iOS folder
 ####Custom splash
+
+###Deploy app to googlePlay
+
