@@ -89,6 +89,9 @@ const Home = ({ navigation }) => {
                                       color={'#156CF7'}
                               />
                           </Pressable>
+                          <Pressable>
+                              <Text onPress={()=>{navigation.navigate(Routes.Test)}}>Test</Text>
+                          </Pressable>
                       </View>
                   </View>
 
